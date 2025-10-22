@@ -39,6 +39,14 @@ main {
     background: linear-gradient(120deg, orange, black);
 }
 
+.gradient-cyan {
+    background: linear-gradient(120deg, cyan, black);
+}
+
+.gradient-purple {
+    background: linear-gradient(120deg, purple, black);
+}
+
 /* ---- Front page ---- */
 
 .site-title-dv {
@@ -48,12 +56,12 @@ main {
     width: 50%;
 }
 
-.section-articles a {
+.card {
     width: 20em;
     height: 28.5em;
 }
 
-.section-articles article img {
+.card-img {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
