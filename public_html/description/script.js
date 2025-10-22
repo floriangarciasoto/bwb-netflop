@@ -146,7 +146,7 @@ function afficherDescription(xmlItem,itemType) {
     let main = document.getElementsByTagName("main")[0];
 
     let sectionItem = document.createElement("section");
-        sectionItem.className = "item-description d-flex justify-content-center";
+        sectionItem.className = "item-description d-flex justify-content-center align-items-start";
         sectionItem.style.background = "linear-gradient(120deg, " + backgroundColor + ", black)";
 
         let sectionBox = document.createElement("article");

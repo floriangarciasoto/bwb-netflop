@@ -88,6 +88,10 @@ main {
 
 /* ---- Description ---- */
 
+.item-description {
+    height: 55em;
+}
+
 .item-description article {
     width: 75em;
 }
