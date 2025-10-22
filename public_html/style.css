@@ -60,6 +60,9 @@ main {
     width: 20em;
     height: 28.5em;
 }
+.section-articles .card {
+    cursor: pointer;
+}
 
 .card-img {
     width: 100%;
