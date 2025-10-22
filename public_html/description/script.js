@@ -60,10 +60,11 @@ function chargerNetflopXml() {
 }
 
 /**
- * Vérifie la présence d'un item dans le fichier XML
- * @param {Document} xmlDoc document netflox.xml
- * @param {String} itemtype nom des balises à chercher dans le document
- * @param {String} itemid id xml de la balise à chercher
+ * Vérifie la présence d'un item dans le fichier XML,
+ * si oui, affiche l'élément avec afficherDescription()
+ * @param {Document} xmlDoc document netflop.xml
+ * @param {String} itemType nom des balises à chercher dans le document
+ * @param {String} itemID ID XML de la balise à chercher
  */
 function verifItem(xmlDoc,itemType,itemID) {
 
@@ -92,12 +93,13 @@ function verifItem(xmlDoc,itemType,itemID) {
 
 /**
  * Ajoute au HTML une description complète d'un item
- * @param {Node} itemid noeud XML de l'item
+ * @param {HTMLElement} xmlItem élément HTML issu du fichier netflop.xml représentant notre item
+ * @param {String} itemType type d'item (film, serie, documentaire ...)
  */
 function afficherDescription(xmlItem,itemType) {
 
     // Attribution des couleurs pour chaque type d'item
-    let sectionAttributes = {
+    let itemsAttributes = {
         film: {
             nameType: "Film",
             color: "red"
@@ -114,29 +116,29 @@ function afficherDescription(xmlItem,itemType) {
             nameType: "Manga",
             color: "yellow"
         },
-        animes: {
+        anime: {
             nameType: "Anime",
             color: "orange"
         },
-        shows: {
+        show: {
             nameType: "Show",
             color: "cyan"
         },
-        concerts: {
+        concert: {
             nameType: "Concert",
             color: "purple"
         }
     };
 
     // Récupération des informations de l'item
-    let nameType = sectionAttributes[itemType].nameType;
+    let backgroundColor = itemsAttributes[itemType].color;
+    let nameType = itemsAttributes[itemType].nameType;
     let nom = xmlItem.getElementsByTagName("nom")[0].textContent;
     let genre = xmlItem.getElementsByTagName("genre")[0].textContent;
     let realisateur = xmlItem.getElementsByTagName("realisateur")[0].textContent;
     let dateSortie = xmlItem.getElementsByTagName("dateSortie")[0].textContent;
     let resumer = xmlItem.getElementsByTagName("resumer")[0].textContent.replace(/ {2,}|\n/g," ");
     let url = xmlItem.getElementsByTagName("url")[0].textContent;
-    let backgroundColor = sectionAttributes[itemType].color;
 
 
     // **** Ajout du HTML au DOM ****
