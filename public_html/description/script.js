@@ -97,24 +97,46 @@ function verifItem(xmlDoc,itemType,itemID) {
 function afficherDescription(xmlItem,itemType) {
 
     // Attribution des couleurs pour chaque type d'item
-    let colors = {
-        film: "red",
-        serie: "blue",
-        documentaire: "green",
-        manga: "yellow",
-        animes: "orange",
-        shows: "cyan",
-        concerts: "purple"
+    let sectionAttributes = {
+        film: {
+            nameType: "Film",
+            color: "red"
+        },
+        serie: {
+            nameType: "Série",
+            color: "blue"
+        },
+        documentaire: {
+            nameType: "Documentaire",
+            color: "green"
+        },
+        manga: {
+            nameType: "Manga",
+            color: "yellow"
+        },
+        animes: {
+            nameType: "Anime",
+            color: "orange"
+        },
+        shows: {
+            nameType: "Show",
+            color: "cyan"
+        },
+        concerts: {
+            nameType: "Concert",
+            color: "purple"
+        }
     };
 
     // Récupération des informations de l'item
+    let nameType = sectionAttributes[itemType].nameType;
     let nom = xmlItem.getElementsByTagName("nom")[0].textContent;
     let genre = xmlItem.getElementsByTagName("genre")[0].textContent;
     let realisateur = xmlItem.getElementsByTagName("realisateur")[0].textContent;
     let dateSortie = xmlItem.getElementsByTagName("dateSortie")[0].textContent;
     let resumer = xmlItem.getElementsByTagName("resumer")[0].textContent.replace(/ {2,}|\n/g," ");
     let url = xmlItem.getElementsByTagName("url")[0].textContent;
-    let backgroundColor = colors[itemType];
+    let backgroundColor = sectionAttributes[itemType].color;
 
 
     // **** Ajout du HTML au DOM ****
@@ -139,6 +161,11 @@ function afficherDescription(xmlItem,itemType) {
                     itemH1.setAttribute("class","h1");
                     itemH1.textContent = nom;
                 itemTexts.appendChild(itemH1);
+
+                let itemSectionType = document.createElement("p");
+                    itemSectionType.setAttribute("class","my-1");
+                    itemSectionType.innerHTML = "<strong>Type :</strong> " + nameType;
+                itemTexts.appendChild(itemSectionType);
 
                 let itemRealisateur = document.createElement("p");
                     itemRealisateur.setAttribute("class","my-1");
