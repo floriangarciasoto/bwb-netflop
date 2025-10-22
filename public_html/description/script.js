@@ -144,47 +144,63 @@ function afficherDescription(xmlItem,itemType) {
     let main = document.getElementsByTagName("main")[0];
 
     let sectionItem = document.createElement("section");
-        sectionItem.setAttribute("class","item-description d-flex justify-content-center");
+        sectionItem.className = "item-description d-flex justify-content-center";
         sectionItem.style.background = "linear-gradient(120deg, " + backgroundColor + ", black)";
 
         let sectionBox = document.createElement("article");
-            sectionBox.setAttribute("class","p-4 m-5 rounded text-white bg-black d-flex");
+            sectionBox.className = "p-4 m-5 rounded text-white bg-black d-flex";
 
             let itemPoster = document.createElement("img");
-                itemPoster.setAttribute("src","../" + url);
-                itemPoster.setAttribute("class","rounded me-4");
+                itemPoster.src = "../" + url;
+                itemPoster.className = "rounded me-4";
             sectionBox.appendChild(itemPoster);
 
             let itemTexts = document.createElement("div");
 
                 let itemH1 = document.createElement("h1");
-                    itemH1.setAttribute("class","h1");
+                    itemH1.className = "h1";
                     itemH1.textContent = nom;
                 itemTexts.appendChild(itemH1);
 
                 let itemSectionType = document.createElement("p");
-                    itemSectionType.setAttribute("class","my-1");
+                    itemSectionType.className = "my-1";
                     itemSectionType.innerHTML = "<strong>Type :</strong> " + nameType;
                 itemTexts.appendChild(itemSectionType);
 
                 let itemRealisateur = document.createElement("p");
-                    itemRealisateur.setAttribute("class","my-1");
+                    itemRealisateur.className = "my-1";
                     itemRealisateur.innerHTML = "<strong>Réalisateur :</strong> " + realisateur;
                 itemTexts.appendChild(itemRealisateur);
 
                 let itemGenre = document.createElement("p");
-                    itemGenre.setAttribute("class","my-1");
+                    itemGenre.className = "my-1";
                     itemGenre.innerHTML = "<strong>Genre :</strong> " + genre;
                 itemTexts.appendChild(itemGenre);
 
                 let itemDate = document.createElement("date");
-                    itemDate.setAttribute("class","d-block my-2");
+                    itemDate.className = "d-block my-2";
                     itemDate.innerHTML = "<strong>Date de sortie :</strong> " + dateSortie;
                 itemTexts.appendChild(itemDate);
 
                 let itemSynopsis = document.createElement("p");
-                    itemSynopsis.setAttribute("class","text-justify");
+                    itemSynopsis.id = "synopsis";
+                    itemSynopsis.className = "text-justify overflow-hidden position-relative m-0";
                     itemSynopsis.innerHTML = "<strong>Synopsis :</strong> " + resumer;
+
+                    let itemSynopsisMore = document.createElement("p");
+                        itemSynopsisMore.id = "synopsis-more";
+                        itemSynopsisMore.className = "position-absolute bottom-0 end-0 bg-black fw-bold m-0 ps-3 cursor-pointer";
+                        itemSynopsisMore.textContent = "... voir plus";
+                        itemSynopsisMore.onclick = function() {
+                            // On enlève l'attribut style qui contient la hauteur limite
+                            let synopsis = document.getElementById("synopsis");
+                                synopsis.removeAttribute("style");
+                            // On retire le bouton "voir plus"
+                            let synopsisMore = document.getElementById("synopsis-more");
+                                synopsisMore.style.display = "none";
+                        }
+                    itemSynopsis.appendChild(itemSynopsisMore);
+
                 itemTexts.appendChild(itemSynopsis);
 
             sectionBox.appendChild(itemTexts);
@@ -192,6 +208,28 @@ function afficherDescription(xmlItem,itemType) {
         sectionItem.appendChild(sectionBox);
 
     main.appendChild(sectionItem);
+
+    // Légère attente du chargement de la page pour constater de la hauteur du synopsis
+    setTimeout(()=>{
+        let synopsis = document.getElementById("synopsis");
+
+        // Si la hauteur du paragraphe synopsis est trop grande
+        if (synopsis.offsetHeight > 350) {
+
+            // On lui fixe une hauteur limite en fonction de la taille de chaque ligne,
+            // ainsi que le nombre de lignes maximal que l'on veut afficher
+            const maxLines = 15;
+            const fontSize = window.getComputedStyle(synopsis).fontSize;
+            synopsis.style.height = `calc(${maxLines} * ${fontSize})`;
+
+        }
+        else {
+            // Sinon on peut enlever le bouton "voir plus"
+            let synopsisMore = document.getElementById("synopsis-more");
+                synopsisMore.style.display = "none";
+        }
+
+    },10);
 
 }
 
