@@ -57,11 +57,15 @@ main {
 }
 
 .card {
-    width: 20em;
-    height: 28.5em;
+    background-color: #222;
 }
 .section-articles .card {
+    width: 20em;
     cursor: pointer;
+    transition-duration: 0.5s;
+}
+.section-articles .card:hover {
+    transform: scale(1.025);
 }
 
 .card-img {
@@ -71,7 +75,7 @@ main {
 }
 
 .section-articles h3 {
-    height: 3em;
+    height: 2.75em;
 }
 
 .section-articles date {

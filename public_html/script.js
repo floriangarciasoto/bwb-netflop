@@ -141,36 +141,44 @@ function creerCarte(itemType,item) {
     let url = item.getElementsByTagName("url")[0].textContent;
 
     // Créer le conteneur de la carte
-    let article = document.createElement("article");
-        article.id = itemType + "-" + item.getAttribute("xml:id");
-        article.className = "card pt-4 ps-4 pe-4 pb-3 rounded text-decoration-none text-white bg-black";
-        article.addEventListener("click",function(){
-            // Récupération du type d'item avec la décomposition de variables avec le tableau créé
-            // grâce au tableau ["item","id"] -> exemple pour l'id "film-1", on split avec "-" : ["film","1"]
-            const [itemType, itemID] = this.id.split('-');
+    let card = document.createElement("article");
+        card.className = "card pt-4 ps-4 pe-4 pb-3 rounded text-decoration-none text-white";
 
-            // Redirection vers la page de description avec les paramètres GET
-            window.location.href = "description?" + "itemtype=" + itemType + "&itemid=" + itemID;
-        });
+        // Vérification si l'ID existe : rend l'élément cliquable si l'ID existe
+        const itemID = item.getAttribute("xml:id");
+        if (itemID !== "") {
+
+            // On attribut un ID à la card pour que l'évenement onclick puisse s'y référer
+            card.id = itemType + "-" + itemID;
+            
+            card.onclick = function(){
+                // Récupération du type d'item avec la décomposition de variables avec le tableau créé
+                // grâce au tableau ["item","id"] -> exemple pour l'id "film-1", on split avec "-" : ["film","1"]
+                const [itemType, itemID] = this.id.split('-');
+
+                // Redirection vers la page de description avec les paramètres GET
+                window.location.href = "description?" + "itemtype=" + itemType + "&itemid=" + itemID;
+            };
+        }
         
         let articleImg = document.createElement("img");
             articleImg.src = url;
             articleImg.setAttribute("class","card-img rounded");
-        article.appendChild(articleImg);
+        card.appendChild(articleImg);
         
         let articleName = document.createElement("h3");
             articleName.setAttribute("class","h3 text-center my-3");
             articleName.textContent = nom;
-        article.appendChild(articleName);
+        card.appendChild(articleName);
         
         let articleDate = document.createElement("date");
             articleDate.setAttribute("date",dateSortie);
             articleDate.setAttribute("class","d-block text-center");
             articleDate.textContent = dateSortie;
-        article.appendChild(articleDate);
+        card.appendChild(articleDate);
             
     // On retourne la carte complète
-    return article;
+    return card;
 }
 
 /**
