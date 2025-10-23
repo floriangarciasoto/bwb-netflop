@@ -5,6 +5,10 @@
     text-align: justify;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 /* -- Header -- */
 
 header {
@@ -17,7 +21,11 @@ main {
     min-height: 35em;
 }
 
-/* -- Gradient backgrounds -- */
+/* -- Backgrounds -- */
+
+.bg-dark-grey {
+    background-color: #222;
+}
 
 .gradient-red {
     background: linear-gradient(120deg, red, black);
@@ -39,6 +47,14 @@ main {
     background: linear-gradient(120deg, orange, black);
 }
 
+.gradient-cyan {
+    background: linear-gradient(120deg, cyan, black);
+}
+
+.gradient-purple {
+    background: linear-gradient(120deg, purple, black);
+}
+
 /* ---- Front page ---- */
 
 .site-title-dv {
@@ -48,19 +64,23 @@ main {
     width: 50%;
 }
 
-.section-articles a {
+.section-articles .card {
     width: 20em;
-    height: 28.5em;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+.section-articles .card:hover {
+    transform: scale(1.025);
 }
 
-.section-articles article img {
+.card-img {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 
 .section-articles h3 {
-    height: 3em;
+    height: 2.75em;
 }
 
 .section-articles date {
@@ -70,17 +90,16 @@ main {
 /* ---- Description ---- */
 
 .item-description {
-    height: 47.5em;
+    height: 55em;
 }
 
 .item-description article {
-    height: 30em;
     width: 75em;
 }
 
 .item-description article img {
-    height: 100%;
-    aspect-ratio: 1;
+    height: 27em;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 
