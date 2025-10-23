@@ -21,7 +21,11 @@ main {
     min-height: 35em;
 }
 
-/* -- Gradient backgrounds -- */
+/* -- Backgrounds -- */
+
+.bg-dark-grey {
+    background-color: #222;
+}
 
 .gradient-red {
     background: linear-gradient(120deg, red, black);
@@ -60,9 +64,6 @@ main {
     width: 50%;
 }
 
-.card {
-    background-color: #222;
-}
 .section-articles .card {
     width: 20em;
     cursor: pointer;
@@ -74,7 +75,7 @@ main {
 
 .card-img {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 
@@ -98,7 +99,7 @@ main {
 
 .item-description article img {
     height: 27em;
-    aspect-ratio: 1;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 

@@ -146,11 +146,11 @@ function afficherDescription(xmlItem,itemType) {
     let main = document.getElementsByTagName("main")[0];
 
     let sectionItem = document.createElement("section");
-        sectionItem.className = "item-description d-flex justify-content-center align-items-start";
-        sectionItem.style.background = "linear-gradient(120deg, " + backgroundColor + ", black)";
+        sectionItem.className = "item-description d-flex justify-content-center align-items-start"
+                              + " gradient-" + backgroundColor;
 
         let sectionBox = document.createElement("article");
-            sectionBox.className = "p-4 m-5 rounded text-white bg-black d-flex";
+            sectionBox.className = "p-4 m-5 rounded text-white d-flex bg-dark-grey";
 
             let itemPoster = document.createElement("img");
                 itemPoster.src = "../" + url;
@@ -191,7 +191,7 @@ function afficherDescription(xmlItem,itemType) {
 
                     let itemSynopsisMore = document.createElement("p");
                         itemSynopsisMore.id = "synopsis-more";
-                        itemSynopsisMore.className = "position-absolute bottom-0 end-0 bg-black fw-bold m-0 ps-3 cursor-pointer";
+                        itemSynopsisMore.className = "position-absolute bottom-0 end-0 bg-dark-grey fw-bold m-0 ps-3 cursor-pointer";
                         itemSynopsisMore.textContent = "... voir plus";
                         itemSynopsisMore.onclick = function() {
                             // On enlève l'attribut style qui contient la hauteur limite
@@ -216,7 +216,7 @@ function afficherDescription(xmlItem,itemType) {
         let synopsis = document.getElementById("synopsis");
 
         // Si la hauteur du paragraphe synopsis est trop grande
-        if (synopsis.offsetHeight > 350) {
+        if (synopsis.offsetHeight > 200) {
 
             // On lui fixe une hauteur limite en fonction de la taille de chaque ligne,
             // ainsi que le nombre de lignes maximal que l'on veut afficher

@@ -137,17 +137,17 @@ function afficherSection(xmlDoc,specs) {
 function creerCarte(itemType,item) {
     // Récupération des données du XML
     let nom = item.getElementsByTagName("nom")[0].textContent;
-    let dateSortie = item.getElementsByTagName("dateSortie")[0].textContent;
+    let genre = item.getElementsByTagName("genre")[0].textContent;
+    let dateSortie = item.getElementsByTagName("dateSortie")[0].textContent.trim();
     let url = item.getElementsByTagName("url")[0].textContent;
 
     // Créer le conteneur de la carte
     let card = document.createElement("article");
-        card.className = "card pt-4 ps-4 pe-4 pb-3 rounded text-decoration-none text-white";
+        card.className = "card pt-4 ps-4 pe-4 pb-3 rounded text-decoration-none text-white bg-dark-grey";
 
         // Vérification si l'ID existe : rend l'élément cliquable si l'ID existe
         const itemID = item.getAttribute("xml:id");
         if (itemID !== "") {
-
             // On attribut un ID à la card pour que l'évenement onclick puisse s'y référer
             card.id = itemType + "-" + itemID;
             
@@ -167,18 +167,37 @@ function creerCarte(itemType,item) {
         card.appendChild(articleImg);
         
         let articleName = document.createElement("h3");
-            articleName.setAttribute("class","h3 text-center my-3");
+            articleName.setAttribute("class","h3 text-center my-3 mb-0");
             articleName.textContent = nom;
         card.appendChild(articleName);
         
-        let articleDate = document.createElement("date");
-            articleDate.setAttribute("date",dateSortie);
-            articleDate.setAttribute("class","d-block text-center");
-            articleDate.textContent = dateSortie;
-        card.appendChild(articleDate);
-            
+        let articleInfos = document.createElement("date");
+            let dateSortieObj = formatterDateObj(dateSortie);
+            articleInfos.setAttribute("date",dateSortieObj.getDate());
+            articleInfos.setAttribute("class","d-block text-center");
+            articleInfos.textContent = genre + " - " + dateSortieObj.getFullYear();
+        card.appendChild(articleInfos);
+
     // On retourne la carte complète
     return card;
+}
+
+/**
+ * Retourne une date en français au format de variable Date() manipulable
+ * @param {String} dateTexte date sous la forme JJ/MM/AAAA
+ * @returns {Date} objet Date()
+ */
+function formatterDateObj(dateTexte) {
+    // Séparation de jour, mois, année
+    dateTexte = dateTexte.split("/");
+    // Si la date de base n'avait que l'année
+    if (dateTexte.length === 1) dateTexte = ["1",...dateTexte];
+    // Si la date de base n'avait que l'année et le mois
+    if (dateTexte.length === 2) dateTexte = ["1",...dateTexte];
+    // Mise en forme de la date sous la forme YYYY-MM-DD
+    dateTexte = dateTexte[2].padStart(4,"0") + "-" + dateTexte[1].padStart(2,"0") + "-" + dateTexte[0].padStart(2,"0");
+    // On retourne la date sous forme d'objet Date() manipulable
+    return new Date(dateTexte);
 }
 
 /**
