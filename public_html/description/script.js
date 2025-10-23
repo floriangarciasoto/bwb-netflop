@@ -68,7 +68,7 @@ function verifItem(jsonObj,itemType,itemID) {
         let idTrouve = false;
         
         for (let i = 0; i < items.length; i++) {
-            if (items[i].hasOwn("id") && items[i].id === itemID) {
+            if (Object.hasOwn(items[i], "id") && items[i].id === itemID) {
                 idTrouve = true;
                 afficherDescription(items[i],itemType);
                 break;
