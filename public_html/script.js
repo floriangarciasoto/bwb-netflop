@@ -98,6 +98,7 @@ function afficherSections(jsonObj) {
 /**
  * Fonction pour afficher les sections depuis le objet JSON
  * @param {Object} jsonObj objet JSON parsé par JSON.parse()
+ * @param {Object} specs   objet JSON contenant les spécificités de la section renseignée
  */
 function afficherSection(jsonObj,specs) {
     let main = document.getElementsByTagName("main")[0];
@@ -133,8 +134,9 @@ function afficherSection(jsonObj,specs) {
 
 /**
  * Fonction générique pour créer une carte d'affichage à partir d'un élément JSON
- * @param {Object} item   - objet JSON (un film, une série, etc ...)
- * @returns {HTMLElement} - element a representant la carte
+ * @param {String} itemType chaîne de caractères ("film", "serie", etc ...)
+ * @param {Object} item     objet JSON (un film, une série, etc ...)
+ * @returns {HTMLElement}   élément card représentant la carte
  */
 function creerCarte(itemType,item) {
     // Récupération des données du JSON
@@ -147,19 +149,15 @@ function creerCarte(itemType,item) {
     let card = document.createElement("article");
         card.className = "card pt-4 ps-4 pe-4 pb-3 rounded text-decoration-none text-white bg-dark-grey";
 
-        // Vérification si l'ID existe : rend l'élément cliquable si l'ID existe
+        // Rend l'élément cliquable si l'ID existe
         const itemID = item.id;
-        if (itemID !== "") {
-            // On attribut un ID à la card pour que l'évenement onclick puisse s'y référer
-            card.id = itemType + "-" + itemID;
-            
+        if (itemID !== undefined) {
             card.onclick = function(){
-                // Récupération du type d'item avec la décomposition de variables avec le tableau créé
-                // grâce au tableau ["item","id"] -> exemple pour l'id "film-1", on split avec "-" : ["film","1"]
-                const [itemType, itemID] = this.id.split('-');
-
-                // Redirection vers la page de description avec les paramètres GET
-                window.location.href = "description?" + "itemtype=" + itemType + "&itemid=" + itemID;
+                this.classList.add("spin");
+                setTimeout(()=>{
+                    // Redirection vers la page de description avec les paramètres GET
+                    window.location.href = "description/" + "?itemtype=" + itemType + "&itemid=" + itemID;
+                },1000);
             };
         }
         

@@ -1,12 +1,26 @@
 /* -- Bootstrap missing -- */
 
-/* Oui je sais Bootstrap ne veut plus l'utiliser mais moi je préfère. */
-.text-justify {
+.text-justify { /* Oui je sais Bootstrap ne veut plus l'utiliser mais moi je préfère. */
     text-align: justify;
 }
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+/* -- Keyframes -- */
+
+@keyframes spin {
+    0% {transform: rotate3d(0,1,0,0deg);}
+    20% {transform: rotate3d(0,1,0,359deg);}
+    40% {transform: rotate3d(0,1,0,0deg);}
+    60% {transform: rotate3d(0,1,0,359deg);}
+    80% {transform: rotate3d(0,1,0,0deg);}
+    100% {transform: rotate3d(0,1,0,359deg);}
+}
+
+.spin {
+    animation: spin 1s linear;
 }
 
 /* -- Header -- */
