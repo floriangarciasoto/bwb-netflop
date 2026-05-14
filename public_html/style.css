@@ -1,8 +1,43 @@
 /* -- Bootstrap missing -- */
 
-/* Oui je sais Bootstrap ne veut plus l'utiliser mais moi je préfère. */
-.text-justify {
+.text-justify { /* Oui je sais Bootstrap ne veut plus l'utiliser mais moi je préfère. */
     text-align: justify;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* -- Global -- */
+
+.max-lines {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.max-lines-2 {
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+}
+.max-lines-3 {
+    line-clamp: 3;
+    -webkit-line-clamp: 3;
+}
+
+/* -- Keyframes -- */
+
+@keyframes spin {
+    0% {transform: rotate3d(0,1,0,0deg);}
+    20% {transform: rotate3d(0,1,0,359deg);}
+    40% {transform: rotate3d(0,1,0,0deg);}
+    60% {transform: rotate3d(0,1,0,359deg);}
+    80% {transform: rotate3d(0,1,0,0deg);}
+    100% {transform: rotate3d(0,1,0,359deg);}
+}
+
+.spin {
+    animation: spin 1s linear;
 }
 
 /* -- Header -- */
@@ -17,70 +52,114 @@ main {
     min-height: 35em;
 }
 
-/* -- Gradient backgrounds -- */
+/* -- Backgrounds -- */
 
-.gradient-red {
+.bg-dark-grey {
+    background-color: #222;
+}
+
+.bg-gradient-grey {
+    background: linear-gradient(120deg, grey, black);
+}
+
+.bg-gradient-red {
     background: linear-gradient(120deg, red, black);
 }
 
-.gradient-blue {
+.bg-gradient-blue {
     background: linear-gradient(120deg, blue, black);
 }
 
-.gradient-green {
+.bg-gradient-green {
     background: linear-gradient(120deg, green, black);
 }
 
-.gradient-yellow {
+.bg-gradient-yellow {
     background: linear-gradient(120deg, yellow, black);
 }
 
-.gradient-orange {
+.bg-gradient-orange {
     background: linear-gradient(120deg, orange, black);
+}
+
+.bg-gradient-cyan {
+    background: linear-gradient(120deg, cyan, black);
+}
+
+.bg-gradient-purple {
+    background: linear-gradient(120deg, purple, black);
 }
 
 /* ---- Front page ---- */
 
-.site-title-dv {
-    background: linear-gradient(120deg, grey, black);
+.slider-button {
+    min-width: 4rem;
+    height: 4rem;
+    border-radius: 4rem;
+    background-color: #222;
+    color: white;
+    font-weight: bold;
+    font-size: 35px;
+    cursor: pointer;
 }
-.site-title-dv > * {
-    width: 50%;
+.slider-button:disabled {
+    color: #555;
+}
+.slider-button-left span {
+    display: block;
+    transform: translateY(-2px) scaleX(-1);
+}
+.slider-button-right span {
+    display: block;
+    transform: translateY(-2px);
 }
 
-.section-articles a {
-    width: 20em;
-    height: 28.5em;
+.card {
+    min-width: 20em;
+    max-width: 20em;
 }
 
-.section-articles article img {
+.card-img {
     width: 100%;
-    aspect-ratio: 1;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 
-.section-articles h3 {
-    height: 3em;
+.card-title {
+    height: 2.5em;
+    font-size: 25px;
 }
 
-.section-articles date {
-    color: lightgray;
+.card-resume {
+    height: 4.5em;
+}
+
+.card-note {
+    padding: 2px 5px 3px 2px;
+}
+.card-note-green {
+    background-color: #080;
+}
+.card-note-orange {
+    background-color: orange;
+}
+.card-note-red {
+    background-color: #c00;
 }
 
 /* ---- Description ---- */
 
 .item-description {
-    height: 47.5em;
+    height: 55em;
 }
 
 .item-description article {
-    height: 30em;
     width: 75em;
 }
 
 .item-description article img {
-    height: 100%;
-    aspect-ratio: 1;
+    height: 27em;
+    aspect-ratio: 0.75;
     object-fit: cover;
 }
 
@@ -88,4 +167,17 @@ main {
 
 footer {
     background-color: darkblue;
+}
+
+
+/* -- Large screens -- */
+
+@media screen and (min-width: 992px) {
+
+    /* -- Bootstrap missing -- */
+    
+    .w-lg-50 {
+        width: 50%;
+    }
+
 }
